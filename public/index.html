@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test WebSocket</title>
+  </head>
+  <body>
+    <div id="webSocketMessage"></div>
+    <script>
+      const socket = new WebSocket("ws://localhost:8080");
+      socket.addEventListener("open", () => {
+        socket.send(
+          JSON.stringify({
+            action: "login",
+            barcode: "1234",
+          })
+        );
+      });
+      socket.addEventListener("message", (event) => {
+        document.getElementById("webSocketMessage").innerHTML = event.data;
+      });
+    </script>
+  </body>
+</html>
